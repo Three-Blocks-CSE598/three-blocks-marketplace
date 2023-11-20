@@ -15,6 +15,7 @@ contract Marketplace {
         uint price;
         address owner;
         bool purchased;
+        string imageData;
     } 
 
     event ProductCreated(
@@ -22,7 +23,8 @@ contract Marketplace {
         string name,
         uint price,
         address owner,
-        bool purchased
+        bool purchased,
+        string imageData
     );
 
     event ProductPurchased(
@@ -30,15 +32,16 @@ contract Marketplace {
         string name,
         uint price,
         address payable owner,
-        bool purchased
+        bool purchased,
+        string imageData
     );
 
-    function createProduct(string memory _name, uint _price) public {
+    function createProduct(string memory _name, uint _price, string memory _imageData) public {
         require(bytes(_name).length > 0);
         require(_price > 0);
-        productCount ++;
-        products[productCount] = Product(productCount, _name, _price, msg.sender, false);
-        emit ProductCreated(productCount, _name, _price, msg.sender, false);
+        productCount++;
+        products[productCount] = Product(productCount, _name, _price, msg.sender, false, _imageData);
+        emit ProductCreated(productCount, _name, _price, msg.sender, false, _imageData);
     }
 
     function purchaseProduct(uint _id) public payable {
