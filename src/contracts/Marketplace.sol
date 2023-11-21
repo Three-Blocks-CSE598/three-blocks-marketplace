@@ -36,6 +36,12 @@ contract Marketplace {
         string imageData
     );
 
+    event ProductEdited(
+        uint id,
+        string newName,
+        uint newPrice
+    );
+
     function createProduct(string memory _name, uint _price, string memory _imageData) public {
         require(bytes(_name).length > 0);
         require(_price > 0);
@@ -55,6 +61,20 @@ contract Marketplace {
         _product.purchased = true;
         products[_id] = _product;
         address(_seller).transfer(msg.value);
-        emit ProductPurchased(productCount, _product.name, _product.price, msg.sender, true);
+        emit ProductPurchased(productCount, _product.name, _product.price, msg.sender, true, _product.imageData);
+    }
+
+    function editProduct(uint _id, string memory _newName, uint _newPrice) public {
+        require(_id > 0 && _id <= productCount);
+        require(bytes(_newName).length > 0);
+        require(_newPrice > 0);
+
+        Product storage productToEdit = products[_id];
+        require(msg.sender == productToEdit.owner, "Only the owner can edit the product");
+
+        productToEdit.name = _newName;
+        productToEdit.price = _newPrice;
+
+        emit ProductEdited(_id, _newName, _newPrice);
     }
 }
