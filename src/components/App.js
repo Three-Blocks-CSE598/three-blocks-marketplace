@@ -9,6 +9,13 @@ class App extends Component {
   async componentWillMount() {
     await this.loadWeb3();
     await this.loadBlockchainData();
+    await this.setState({
+      authors: [
+        "Harshak Krishnaa Keerthipati",
+        "Rajkumar Sukumar",
+        "Sai Ramya Linga",
+      ],
+    });
   }
 
   async loadWeb3() {
@@ -96,6 +103,7 @@ class App extends Component {
       productCount: 0,
       products: [],
       loading: true,
+      authors: [],
     };
     this.createProduct = this.createProduct.bind(this);
     this.purchaseProduct = this.purchaseProduct.bind(this);
@@ -109,7 +117,7 @@ class App extends Component {
           createProduct={this.createProduct}
           account={this.state.account}
         />
-        <div className="container-fluid mt-5">
+        <div className="container-fluid my-5">
           <div className="row">
             <main role="main" className="col-lg-12 d-flex">
               {this.state.loading ? (
@@ -138,6 +146,18 @@ class App extends Component {
             </main>
           </div>
         </div>
+        <footer className="fixed-bottom bg-dark text-light text-center p-1">
+          <p className="align-middle d-inline">
+            © {new Date().getFullYear()} |{" "}
+            {this.state.authors &&
+              this.state.authors.map((author, index) => (
+                <span key={index}>
+                  {author}
+                  {index < this.state.authors.length - 1 && ", "}
+                </span>
+              ))}
+          </p>
+        </footer>
       </div>
     );
   }

@@ -34,6 +34,9 @@ class Navbar extends Component {
 
     this.props.createProduct(name, price, image);
     this.toggleModal();
+    this.productName.value = "";
+    this.productImage.value = "";
+    this.productPrice.value = "";
   };
 
   render() {
