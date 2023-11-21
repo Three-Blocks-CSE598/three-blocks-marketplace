@@ -49,7 +49,7 @@ class App extends Component {
         const product = await marketplace.methods.products(i).call();
         products.push(product);
       }
-      this.setState({products});
+      this.setState({ products });
     } else {
       window.alert("Marketplace contract not deployed to detected network.");
     }
@@ -78,6 +78,17 @@ class App extends Component {
       });
   }
 
+  editProduct(id, newName, newPrice) {
+    this.setState({ loading: true });
+    this.state.marketplace.methods
+      .editProduct(id, newName, newPrice)
+      .send({ from: this.state.account })
+      .once("receipt", (receipt) => {
+        this.setState({ loading: false });
+        this.loadBlockchainData();
+      });
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -88,6 +99,7 @@ class App extends Component {
     };
     this.createProduct = this.createProduct.bind(this);
     this.purchaseProduct = this.purchaseProduct.bind(this);
+    this.editProduct = this.editProduct.bind(this);
   }
 
   render() {
@@ -119,6 +131,7 @@ class App extends Component {
                   products={this.state.products}
                   createProduct={this.createProduct}
                   purchaseProduct={this.purchaseProduct}
+                  editProduct={this.editProduct}
                   currentAccount={this.state.account}
                 />
               )}

@@ -1,0 +1,21 @@
+.no-products-message {
+    font-size: 2rem;
+    margin-top: 50px;
+  }
+  
+  .extravagant {
+    font-family: 'Comic Sans';
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    animation: pulse 1.5s infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+  

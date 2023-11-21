@@ -112,7 +112,7 @@ class Navbar extends Component {
                           </label>
                           <input
                             id="productPrice"
-                            type="text"
+                            type="number"
                             ref={(input) => {
                               this.productPrice = input;
                             }}
