@@ -16,6 +16,7 @@ contract Marketplace {
         address owner;
         bool purchased;
         string imageData;
+        string description;
     } 
 
     event ProductCreated(
@@ -24,7 +25,8 @@ contract Marketplace {
         uint price,
         address owner,
         bool purchased,
-        string imageData
+        string imageData,
+        string description
     );
 
     event ProductPurchased(
@@ -33,21 +35,23 @@ contract Marketplace {
         uint price,
         address payable owner,
         bool purchased,
-        string imageData
+        string imageData,
+        string description
     );
 
     event ProductEdited(
         uint id,
         string newName,
-        uint newPrice
+        uint newPrice,
+        string newDescription
     );
 
-    function createProduct(string memory _name, uint _price, string memory _imageData) public {
+    function createProduct(string memory _name, uint _price, string memory _imageData,string memory _description) public {
         require(bytes(_name).length > 0);
         require(_price > 0);
         productCount++;
-        products[productCount] = Product(productCount, _name, _price, msg.sender, false, _imageData);
-        emit ProductCreated(productCount, _name, _price, msg.sender, false, _imageData);
+        products[productCount] = Product(productCount, _name, _price, msg.sender, false, _imageData,_description);
+        emit ProductCreated(productCount, _name, _price, msg.sender, false, _imageData,_description);
     }
 
     function purchaseProduct(uint _id) public payable {
@@ -61,10 +65,10 @@ contract Marketplace {
         _product.purchased = true;
         products[_id] = _product;
         address(_seller).transfer(msg.value);
-        emit ProductPurchased(productCount, _product.name, _product.price, msg.sender, true, _product.imageData);
+        emit ProductPurchased(productCount, _product.name, _product.price, msg.sender, true, _product.imageData,_product.description);
     }
 
-    function editProduct(uint _id, string memory _newName, uint _newPrice) public {
+    function editProduct(uint _id, string memory _newName, uint _newPrice,string memory _newDescription) public {
         require(_id > 0 && _id <= productCount);
         require(bytes(_newName).length > 0);
         require(_newPrice > 0);
@@ -74,7 +78,8 @@ contract Marketplace {
 
         productToEdit.name = _newName;
         productToEdit.price = _newPrice;
+        productToEdit.description = _newDescription;
 
-        emit ProductEdited(_id, _newName, _newPrice);
+        emit ProductEdited(_id, _newName, _newPrice,_newDescription);
     }
 }

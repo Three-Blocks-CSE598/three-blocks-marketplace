@@ -32,7 +32,7 @@ contract('Marketplace', ([deployer, seller, buyer]) => {
     let result, productCount
 
     before(async () => {
-      result = await marketplace.createProduct('Laptop', web3.utils.toWei('1', 'Ether'), { from: seller })
+      result = await marketplace.createProduct('Laptop', web3.utils.toWei('1', 'Ether'), 'Product description',{ from: seller })
       productCount = await marketplace.productCount()
     })
 
@@ -45,6 +45,7 @@ contract('Marketplace', ([deployer, seller, buyer]) => {
       assert.equal(event.price, '1000000000000000000', 'price is correct')
       assert.equal(event.owner, seller, 'owner is correct')
       assert.equal(event.purchased, false, 'purchased is correct')
+      assert.equal(event.description, 'Product description', 'description is correct')
 
       await await marketplace.createProduct('', web3.utils.toWei('1', 'Ether'), { from: seller }).should.be.rejected;
       await await marketplace.createProduct('Laptop', 0, { from: seller }).should.be.rejected;
@@ -63,6 +64,7 @@ contract('Marketplace', ([deployer, seller, buyer]) => {
         assert.equal(event.price, '1000000000000000000', 'price is correct')
         assert.equal(event.owner, buyer, 'owner is correct')
         assert.equal(event.purchased, true, 'purchased is correct')
+        assert.equal(event.description, 'Product description', 'description is correct')
       
         // Check that seller received funds
         let newSellerBalance

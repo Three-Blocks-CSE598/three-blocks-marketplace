@@ -31,8 +31,9 @@ class Navbar extends Component {
       "Ether"
     );
     const image = this.productImage.value;
+    const description = this.productDescription.value;
 
-    this.props.createProduct(name, price, image);
+    this.props.createProduct(name, price, image,description);
     this.toggleModal();
     this.productName.value = "";
     this.productImage.value = "";
@@ -139,6 +140,21 @@ class Navbar extends Component {
                             placeholder="Enter product image URL"
                           />
                         </div>
+                        <div className="form-group">
+                          <label htmlFor="productDescription">
+                          <FontAwesomeIcon icon={faDollarSign} />Product Description
+                          </label>
+                          <input
+                            id="productDescription"
+                            type="text"
+                            ref={(input) => {
+                              this.productDescription = input;
+                            }}
+    className="form-control"
+    placeholder="Enter product description"
+  />
+</div>
+
                         <button type="submit" className="btn btn-success">
                           <FontAwesomeIcon icon={faStar} /> Add Product
                         </button>

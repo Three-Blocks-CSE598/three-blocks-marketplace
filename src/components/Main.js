@@ -27,7 +27,8 @@ class Main extends Component {
       "Ether"
     );
     const id = this.state.editProductId;
-    this.props.editProduct(id, name, price);
+    const description = this.productDescription.value;
+    this.props.editProduct(id, name, price,description);
     this.toggleModal();
   };
 
@@ -117,6 +118,21 @@ class Main extends Component {
                       required
                     />
                   </div>
+                  <div className="form-group">
+                    <label htmlFor="productDescription">
+                      <FontAwesomeIcon icon={faDollarSign} /> Product Description
+                    </label>
+                    <input
+                      id="productDescription"
+                      type="text"
+                      ref={(input) => {
+                        this.productDescription = input;
+                      }}
+                      className="form-control"
+                      placeholder="Enter new product description"
+                      required
+                    />
+                  </div>
                   <button type="submit" className="btn btn-success">
                     <FontAwesomeIcon icon={faStar} /> Submit
                   </button>
@@ -160,6 +176,7 @@ class Main extends Component {
                       🏷️ {product.name}{" "}
                       {product.purchased ? "(Purchased)" : null}
                     </h5>
+                          {product.description}
                     <p className="card-text">
                       💰
                       {window.web3.utils.fromWei(
@@ -171,6 +188,7 @@ class Main extends Component {
                         <>
                           <br />
                           👤 Owner: {product.owner}
+                          
                         </>
                       )}
                     </p>
@@ -199,6 +217,7 @@ class Main extends Component {
                             product.price,
                             "ether"
                           );
+                          this.productDescription.value = product.description;
                           this.setState({ editProductId: product.id });
                           this.toggleModal();
                         }}

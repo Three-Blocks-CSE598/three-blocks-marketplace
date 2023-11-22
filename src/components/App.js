@@ -62,11 +62,11 @@ class App extends Component {
     }
   }
 
-  createProduct(name, price, imageData) {
+  createProduct(name, price, imageData,description) {
     this.setState({ loading: true });
 
     this.state.marketplace.methods
-      .createProduct(name, price, imageData)
+      .createProduct(name, price, imageData, description)
       .send({ from: this.state.account })
       .once("receipt", (receipt) => {
         this.setState({ loading: false });
@@ -85,10 +85,10 @@ class App extends Component {
       });
   }
 
-  editProduct(id, newName, newPrice) {
+  editProduct(id, newName, newPrice,newDescription) {
     this.setState({ loading: true });
     this.state.marketplace.methods
-      .editProduct(id, newName, newPrice)
+      .editProduct(id, newName, newPrice,newDescription)
       .send({ from: this.state.account })
       .once("receipt", (receipt) => {
         this.setState({ loading: false });
