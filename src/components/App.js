@@ -17,7 +17,12 @@ class App extends Component {
     });
 
     window.ethereum.on('accountsChanged', () => {
-      window.location.reload();
+      const proceed = window.confirm("Account change detected. Do you want to refresh the page?");
+      if (proceed) {
+        window.location.reload();
+      } else {
+        console.log("Cancelling...");
+      }
     });
   }
 
