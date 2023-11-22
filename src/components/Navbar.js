@@ -38,6 +38,7 @@ class Navbar extends Component {
     this.productName.value = "";
     this.productImage.value = "";
     this.productPrice.value = "";
+    this.productDescription.value = "";
   };
 
   render() {
@@ -152,6 +153,7 @@ class Navbar extends Component {
                             }}
     className="form-control"
     placeholder="Enter product description"
+    required
   />
 </div>
 

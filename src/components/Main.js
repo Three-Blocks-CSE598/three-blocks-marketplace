@@ -28,7 +28,7 @@ class Main extends Component {
     );
     const id = this.state.editProductId;
     const description = this.productDescription.value;
-    this.props.editProduct(id, name, price,description);
+    this.props.editProduct(id, name, price, description);
     this.toggleModal();
   };
 
@@ -176,7 +176,7 @@ class Main extends Component {
                       🏷️ {product.name}{" "}
                       {product.purchased ? "(Purchased)" : null}
                     </h5>
-                          {product.description}
+                         <h6> {product.description}{" "}</h6>
                     <p className="card-text">
                       💰
                       {window.web3.utils.fromWei(

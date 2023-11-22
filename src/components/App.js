@@ -70,7 +70,7 @@ class App extends Component {
     }
   }
 
-  createProduct(name, price, imageData,description) {
+  createProduct(name, price, imageData, description) {
     this.setState({ loading: true });
 
     this.state.marketplace.methods
@@ -93,10 +93,10 @@ class App extends Component {
       });
   }
 
-  editProduct(id, newName, newPrice,newDescription) {
+  editProduct(id, newName, newPrice, newDescription) {
     this.setState({ loading: true });
     this.state.marketplace.methods
-      .editProduct(id, newName, newPrice,newDescription)
+      .editProduct(id, newName, newPrice, newDescription)
       .send({ from: this.state.account })
       .once("receipt", (receipt) => {
         this.setState({ loading: false });
