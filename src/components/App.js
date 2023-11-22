@@ -4,7 +4,6 @@ import "./App.css";
 import Marketplace from "../abis/Marketplace.json";
 import Navbar from "./Navbar";
 import Main from "./Main";
-
 class App extends Component {
   async componentWillMount() {
     await this.loadWeb3();
@@ -15,6 +14,10 @@ class App extends Component {
         "Rajkumar Sukumar",
         "Sai Ramya Linga",
       ],
+    });
+
+    window.ethereum.on('accountsChanged', () => {
+      window.location.reload();
     });
   }
 
