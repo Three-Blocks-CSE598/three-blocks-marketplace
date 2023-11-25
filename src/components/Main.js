@@ -6,7 +6,6 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showMyProducts: false,
       showModal: false,
       editProductId: 0,
     };
@@ -34,7 +33,7 @@ class Main extends Component {
 
   render() {
     const { products, currentAccount } = this.props;
-    const { showMyProducts } = this.state;
+    const { showMyProducts } = this.props;
 
     const filteredProducts = showMyProducts
       ? products.filter((prod) => prod.owner === currentAccount)
@@ -52,7 +51,7 @@ class Main extends Component {
           <li className="nav-item">
             <button
               className={`nav-link ${!showMyProducts && "active"}`}
-              onClick={() => this.setState({ showMyProducts: false })}
+              onClick={() => this.props.changeMyProductsVisibility(false)}
             >
               Products to buy
             </button>
@@ -60,7 +59,7 @@ class Main extends Component {
           <li className="nav-item">
             <button
               className={`nav-link ${showMyProducts && "active"}`}
-              onClick={() => this.setState({ showMyProducts: true })}
+              onClick={() => this.props.changeMyProductsVisibility(true)}
             >
               My Products
             </button>
@@ -120,7 +119,8 @@ class Main extends Component {
                   </div>
                   <div className="form-group">
                     <label htmlFor="productDescription">
-                      <FontAwesomeIcon icon={faDollarSign} /> Product Description
+                      <FontAwesomeIcon icon={faDollarSign} /> Product
+                      Description
                     </label>
                     <input
                       id="productDescription"
@@ -172,26 +172,27 @@ class Main extends Component {
                   </div>
 
                   <div className="card-body">
-                    <h5 className="card-title">
+                    <h5 className="card-title mb-2">
                       🏷️ {product.name}{" "}
                       {product.purchased ? "(Purchased)" : null}
                     </h5>
-                         <h6> {product.description}{" "}</h6>
-                    <p className="card-text">
+                    <span>{product.description}</span>
+                    <p className="card-text mb-2">
                       💰
                       {window.web3.utils.fromWei(
                         product.price.toString(),
                         "Ether"
                       )}{" "}
                       ETH
-                      {this.props.currentAccount !== product.owner && (
-                        <>
-                          <br />
-                          👤 Owner: {product.owner}
-                          
-                        </>
-                      )}
                     </p>
+                    {this.props.currentAccount !== product.owner && (
+                      <div className="mb-2">
+                        👤 Posted by{" "}
+                        <span style={{ fontSize: "0.7rem" }}>
+                          {product.owner}
+                        </span>
+                      </div>
+                    )}
                     {this.props.currentAccount !== product.owner ? (
                       <button
                         name={product.id}
@@ -233,7 +234,16 @@ class Main extends Component {
                       >
                         📝 Edit this item
                       </button>
-                    ) : null}
+                    ) : (
+                      <button
+                        name={product.id}
+                        value={product.price}
+                        className="btn btn-light btn-dark"
+                        disabled
+                      >
+                        🚫 Item cannot be edited
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

@@ -104,6 +104,10 @@ class App extends Component {
       });
   }
 
+  changeMyProductsVisibility(val) {
+    this.setState({showMyProducts: val});
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -112,10 +116,12 @@ class App extends Component {
       products: [],
       loading: true,
       authors: [],
+      showMyProducts: false,
     };
     this.createProduct = this.createProduct.bind(this);
     this.purchaseProduct = this.purchaseProduct.bind(this);
     this.editProduct = this.editProduct.bind(this);
+    this.changeMyProductsVisibility = this.changeMyProductsVisibility.bind(this);
   }
 
   render() {
@@ -149,6 +155,8 @@ class App extends Component {
                   purchaseProduct={this.purchaseProduct}
                   editProduct={this.editProduct}
                   currentAccount={this.state.account}
+                  showMyProducts={this.state.showMyProducts}
+                  changeMyProductsVisibility={this.changeMyProductsVisibility}
                 />
               )}
             </main>
