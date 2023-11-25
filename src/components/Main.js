@@ -1,4 +1,9 @@
-import { faDollarSign, faStar, faTag } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDollarSign,
+  faMessage,
+  faStar,
+  faTag,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
 
@@ -104,7 +109,7 @@ class Main extends Component {
                   <div className="form-group">
                     <label htmlFor="productPrice">
                       <FontAwesomeIcon icon={faDollarSign} /> Product Price (in
-                      Ether)
+                      ETH)
                     </label>
                     <input
                       id="productPrice"
@@ -119,8 +124,7 @@ class Main extends Component {
                   </div>
                   <div className="form-group">
                     <label htmlFor="productDescription">
-                      <FontAwesomeIcon icon={faDollarSign} /> Product
-                      Description
+                      <FontAwesomeIcon icon={faMessage} /> Product Description
                     </label>
                     <input
                       id="productDescription"

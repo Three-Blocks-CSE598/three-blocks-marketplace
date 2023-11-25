@@ -6,6 +6,8 @@ import {
   faDollarSign,
   faUser,
   faImage,
+  faTag,
+  faMessage,
 } from "@fortawesome/free-solid-svg-icons";
 
 class Navbar extends Component {
@@ -33,7 +35,7 @@ class Navbar extends Component {
     const image = this.productImage.value;
     const description = this.productDescription.value;
 
-    this.props.createProduct(name, price, image,description);
+    this.props.createProduct(name, price, image, description);
     this.toggleModal();
     this.productName.value = "";
     this.productImage.value = "";
@@ -92,12 +94,10 @@ class Navbar extends Component {
                       </button>
                     </div>
                     <div className="modal-body">
-                      <form
-                        onSubmit={this.handleSubmit}
-                      >
+                      <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                           <label htmlFor="productName">
-                            <FontAwesomeIcon icon={faDollarSign} /> Product Name
+                            <FontAwesomeIcon icon={faTag} /> Product Name
                           </label>
                           <input
                             id="productName"
@@ -128,8 +128,8 @@ class Navbar extends Component {
                         </div>
                         <div className="form-group">
                           <label htmlFor="productPrice">
-                            <FontAwesomeIcon icon={faImage} /> Product
-                            Image URL (https://...)
+                            <FontAwesomeIcon icon={faImage} /> Product Image URL
+                            (https://...)
                           </label>
                           <input
                             id="productImage"
@@ -143,7 +143,8 @@ class Navbar extends Component {
                         </div>
                         <div className="form-group">
                           <label htmlFor="productDescription">
-                          <FontAwesomeIcon icon={faDollarSign} />Product Description
+                            <FontAwesomeIcon icon={faMessage} /> Product
+                            Description
                           </label>
                           <input
                             id="productDescription"
@@ -151,11 +152,11 @@ class Navbar extends Component {
                             ref={(input) => {
                               this.productDescription = input;
                             }}
-    className="form-control"
-    placeholder="Enter product description"
-    required
-  />
-</div>
+                            className="form-control"
+                            placeholder="Enter product description"
+                            required
+                          />
+                        </div>
 
                         <button type="submit" className="btn btn-success">
                           <FontAwesomeIcon icon={faStar} /> Add Product
