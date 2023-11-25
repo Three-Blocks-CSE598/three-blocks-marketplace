@@ -198,10 +198,19 @@ class Main extends Component {
                         value={product.price}
                         className="btn btn-dark"
                         onClick={(event) => {
-                          this.props.purchaseProduct(
-                            event.target.name,
-                            event.target.value
+                          const proceed = window.confirm(
+                            `Are you sure you want to purchase this product (${
+                              product.name
+                            } - ${window.web3.utils.fromWei(
+                              product.price
+                            )}ETH)?`
                           );
+                          if (proceed) {
+                            this.props.purchaseProduct(
+                              event.target.name,
+                              event.target.value
+                            );
+                          }
                         }}
                       >
                         🛍️ Buy this item
