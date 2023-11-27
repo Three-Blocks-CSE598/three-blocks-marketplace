@@ -10,6 +10,7 @@ import {
   faMessage,
 } from "@fortawesome/free-solid-svg-icons";
 
+// Navbar is responsible for showing the logo, the "Sell a product" button and the current account.
 class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +24,8 @@ class Navbar extends Component {
       showModal: !prevState.showModal,
     }));
   };
-
+  
+  // Handler for the "Sell a product" form submission
   handleSubmit = (event) => {
     event.preventDefault();
 

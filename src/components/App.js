@@ -5,6 +5,8 @@ import Marketplace from "../abis/Marketplace.json";
 import Navbar from "./Navbar";
 import Main from "./Main";
 class App extends Component {
+  
+  // This has the function calls to be made when the parent (root) component is mounted in the DOM
   async componentWillMount() {
     await this.loadWeb3();
     await this.loadBlockchainData();
@@ -26,6 +28,7 @@ class App extends Component {
     });
   }
 
+  // Load the web3.js from the global window object.
   async loadWeb3() {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
@@ -39,6 +42,7 @@ class App extends Component {
     }
   }
 
+  // Fetches all the information (accounts, products) from the blockchain network by using web3.js
   async loadBlockchainData() {
     const web3 = window.web3;
 
@@ -70,6 +74,7 @@ class App extends Component {
     }
   }
 
+  // Handler for creating a product using the smart contract
   createProduct(name, price, imageData, description) {
     this.setState({ loading: true });
 
@@ -82,6 +87,7 @@ class App extends Component {
       });
   }
 
+  // Handler for purchasing a product using the smart contract
   purchaseProduct(id, price) {
     this.setState({ loading: true });
     this.state.marketplace.methods
@@ -93,6 +99,7 @@ class App extends Component {
       });
   }
 
+  // Handler for editing a product using the smart contract
   editProduct(id, newName, newPrice, newDescription) {
     this.setState({ loading: true });
     this.state.marketplace.methods
@@ -104,6 +111,7 @@ class App extends Component {
       });
   }
 
+  // Handler for toggling between "Products to buy" vs "My products"
   changeMyProductsVisibility(val) {
     this.setState({showMyProducts: val});
   }

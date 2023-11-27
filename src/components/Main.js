@@ -7,6 +7,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
 
+// Main is responsible for the grid layout of the products to buy / my products
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -16,12 +17,14 @@ class Main extends Component {
     };
   }
 
+  // This toggleModal() shows/hides the modal when editing an item
   toggleModal = () => {
     this.setState((prevState) => ({
       showModal: !prevState.showModal,
     }));
   };
 
+  // Handler for the "Edit product" form submission
   handleSubmit = (event) => {
     event.preventDefault();
 
